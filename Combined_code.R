@@ -1,4 +1,4 @@
-// European Working Condition Survey- code
+#European Working Condition Survey- Project 1 code
 
 #Reading data into R
 dataset = read.csv('EWCS_2016.csv', na.strings = '-999')
@@ -131,15 +131,6 @@ pam_results <- dataset %>%
 
 pam_results$the_summary
 
-
-
-
-
-
-
-
-
-
 #Visualization of data in a lower dimensional space
 library(Rtsne)
 tsne_obj <- Rtsne(gower_dist, is_distance = TRUE)
@@ -154,41 +145,7 @@ ggplot(aes(x = X, y = Y), data = tsne_data) +
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Students' Grades Prediction-code
+#Students' Grades Prediction- Project 2 code
 
 
 #Importing the datasets
@@ -477,21 +434,7 @@ rmse(y_test_boost, testData$G3)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Classification Model On Bank Marketing Dataset
+#Classification Model On Bank Marketing Dataset- Porject 3 code
 
 
 #Read the file in R
