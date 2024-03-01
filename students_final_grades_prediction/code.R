@@ -58,7 +58,7 @@ trainingData = subset(student.comb, split== TRUE)
 testData = subset(student.comb, split== FALSE)
 
 
-# Linear Regression
+# ----------------------------------------------------------------------------Linear Regression ----------------------------------------------------------------------------
 
 #Fitting the model
 ln_model = lm(formula = G3~., data = trainingData)
@@ -73,7 +73,7 @@ y_test_ln = predict(ln_model, newdata = testData)
 rmse(testData$G3, y_test_ln)
 
 
-#Hybrid stepwise regression
+# ----------------------------------------------------------------------------Hybrid stepwise regression----------------------------------------------------------------------------
 
 #Fitting the model
 subset_model = step(ln_model, direction = "both", trace = 1)
@@ -88,7 +88,7 @@ y_test_subset= predict(subset_model, newdata = testData)
 rmse(testData$G3,y_test_subset)
 
 
-#Lasso Regression
+#----------------------------------------------------------------------------Lasso Regression----------------------------------------------------------------------------
 
 x_train_lasso = data.matrix(trainingData[,-31])
 y_train_lasso = trainingData$G3
@@ -115,7 +115,7 @@ y_test_lasso=predict(lasso_model, s= optimal_lambda, x_test_lasso)
 rmse(testData$G3,y_test_lasso)
 
 
-#Decision Tree
+#----------------------------------------------------------------------------Decision Tree----------------------------------------------------------------------------
 
 library(rpart)
 set.seed(123)
@@ -150,7 +150,7 @@ y_test_pruned=predict(pruned.model ,newdata = testData)
 rmse(testData$G3, y_test_pruned)
 
 
-#Random Forest
+#----------------------------------------------------------------------------Random Forest----------------------------------------------------------------------------
 
 library(randomForest)
 set.seed(124)
@@ -205,7 +205,7 @@ legend("topright",legend=c("Out of Bag Error","Test Error"),pch=19,
 varImp(rf)
 
 
-#Gradient Boosting
+#----------------------------------------------------------------------------Gradient Boosting----------------------------------------------------------------------------
 
 install.packages('gbm')
 library(gbm)
@@ -263,7 +263,7 @@ gbm.fit.final <- gbm(
   verbose = FALSE
 ) 
 
-# Summary of the fitted model
+# ----------------------------------------------------------------------------Summary of the fitted model----------------------------------------------------------------------------
 summary(gbm.fit.final)
 gbm.perf(gbm.fit.final)
 #Visualizing important variables considered by GBM
@@ -275,7 +275,7 @@ summary(
   las = 1
 )
 
-#Prediction G3 on the training set by GBM model
+#----------------------------------------------------------------------------Prediction G3 on the training set by GBM model----------------------------------------------------------------------------
 library(Metrics)
 y_train_boost= predict(gbm.fit.final, n.trees = gbm.fit.final$n.trees, trainingData)
 #Checking accuracy of the model on training dataset using RMSE
