@@ -94,21 +94,21 @@ dataset$JobSatisfaction = factor(dataset$JobSatisfaction,
 
 
 
-# Compute Gower distance
+# ----------------------------------------------------------------------------Compute Gower distance----------------------------------------------------------------------------
 library(cluster)
 gower_dist <- daisy(dataset, metric = "gower")
 gower_mat <- as.matrix(gower_dist)
 
 
-# Print most similar individuals based on distance
+# ----------------------------------------------------------------------------Print most similar individuals based on distance----------------------------------------------------------------------------
 dataset[which(gower_mat == min(gower_mat[gower_mat != min(gower_mat)]), arr.ind = TRUE)[1, ], ]
 
 
-# Print most dissimilar individuals based on distance
+# ----------------------------------------------------------------------------Print most dissimilar individuals based on distance----------------------------------------------------------------------------
 dataset[which(gower_mat == max(gower_mat[gower_mat != max(gower_mat)]), arr.ind = TRUE)[1, ], ]
 
 
-#Using the silhouette Method to find opitmal number of clusters
+#----------------------------------------------------------------------------Using the silhouette Method to find opitmal number of clusters----------------------------------------------------------------------------
 sil_width <- c(NA)
 for(i in 2:8){  
   pam_fit <- pam(gower_dist, diss = TRUE, k = i)  
@@ -120,7 +120,7 @@ plot(1:8, sil_width,
 lines(1:8, sil_width)
 
 
-#Fitting PAM model for clustering
+#----------------------------------------------------------------------------Fitting PAM model for clustering----------------------------------------------------------------------------
 k = 3
 pam_fit <- pam(gower_dist, diss = TRUE, k)
 
@@ -131,7 +131,7 @@ pam_results <- dataset %>%
 
 pam_results$the_summary
 
-#Visualization of data in a lower dimensional space
+#----------------------------------------------------------------------------Visualization of data in a lower dimensional space----------------------------------------------------------------------------
 library(Rtsne)
 tsne_obj <- Rtsne(gower_dist, is_distance = TRUE)
 
